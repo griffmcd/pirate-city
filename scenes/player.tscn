@@ -1,7 +1,7 @@
 [gd_scene load_steps=45 format=3 uid="uid://cynbwkevwhuhe"]
 
 [ext_resource type="Texture2D" uid="uid://b0s7kvfxpf4ep" path="res://assets/MiniWorldSprites/Characters/Monsters/Pirates/PirateGrunt.png" id="1_mxbdm"]
-[ext_resource type="Script" path="res://player.gd" id="1_qy18s"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_qy18s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17phk"]
 atlas = ExtResource("1_mxbdm")
@@ -183,7 +183,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_down",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -203,7 +203,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_left",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -223,7 +223,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_right",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -243,7 +243,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_up",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -263,7 +263,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_down",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -283,7 +283,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_left",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -303,7 +303,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_right",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -323,7 +323,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_up",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q185y"]
@@ -331,13 +331,15 @@ radius = 4.0
 height = 12.0
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(11, 11)
+position = Vector2(12, -7)
+scale = Vector2(2, 2)
+collision_layer = 2
 script = ExtResource("1_qy18s")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rl10b")
-animation = &"walk_up"
+animation = &"attack_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
