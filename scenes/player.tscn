@@ -340,7 +340,7 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rl10b")
 animation = &"attack_up"
-frame_progress = 0.31082
+frame_progress = 0.0278356
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
