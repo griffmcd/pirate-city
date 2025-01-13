@@ -1,14 +1,25 @@
 extends CharacterBody2D
 
 signal hit 
-var direction = Vector2(1, 0)
+
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-var SCREEN_SIZE
 const LEFT_DIR = Vector2(-1, 0)
 const RIGHT_DIR = Vector2(1, 0)
 const UP_DIR = Vector2(0, -1)
 const DOWN_DIR = Vector2(0, 1)
+
+@onready var attack_left_hitbox: RayCast2D = $Hitboxes/AttackLeftHitbox
+@onready var attack_right_hitbox: RayCast2D = $Hitboxes/AttackRightHitbox
+@onready var attack_down_hitbox: RayCast2D = $Hitboxes/AttackDownHitbox
+@onready var attack_up_hitbox: RayCast2D = $Hitboxes/AttackUpHitbox
+@onready var attack_cooldown_timer: Timer = $Hitboxes/AttackCooldownTimer
+
+var SCREEN_SIZE
+var direction = DOWN_DIR
+var current_hitbox = attack_down_hitbox 
+var can_attack = true 
+var is_attacking = false 
+
 
 func _ready() -> void:
 	SCREEN_SIZE = get_viewport_rect().size
@@ -20,23 +31,29 @@ func start(pos):
 	$CollisionShape2D.disabled = false 
 	
 func _process(delta: float) -> void:
+	if $AnimatedSprite2D.is_playing() && $AnimatedSprite2D.animation == "attack":
+		return 
 	var velocity = Vector2.ZERO
-	var is_attacking = false 
 	if Input.is_action_pressed("move_right"):
 		direction = RIGHT_DIR
+		current_hitbox = attack_right_hitbox
 		velocity.x += 1
 	if Input.is_action_pressed("move_left"):
 		direction = LEFT_DIR
+		current_hitbox = attack_left_hitbox
 		velocity.x -= 1
 	if Input.is_action_pressed("move_down"):
 		direction = DOWN_DIR
+		current_hitbox = attack_down_hitbox 
 		velocity.y += 1
 	if Input.is_action_pressed("move_up"):
 		direction = UP_DIR 
+		current_hitbox = attack_up_hitbox
 		velocity.y -= 1
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack") and can_attack:
 		is_attacking = true 
-		
+		attack_cooldown_timer.start()
+
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * SPEED 
 		$AnimatedSprite2D.play()
@@ -66,4 +83,13 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta):
+	if current_hitbox and current_hitbox.is_colliding():
+		var collider = current_hitbox.get_collider()
+		print("Collided with " + collider.get_class())
+		if collider.is_in_group("Enemies"):	
+			collider.queue_free()
 	move_and_slide()
+
+func _on_attack_cooldown_timer_timeout() -> void:
+	can_attack = true 
+	is_attacking = false 
