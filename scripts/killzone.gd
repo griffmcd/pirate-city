@@ -13,10 +13,11 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print("You died")
-	Engine.time_scale = 0.5
-	body.queue_free()
-	timer.start()
+	pass
+	#print("You died")
+	#Engine.time_scale = 0.5
+	#body.queue_free()
+	#timer.start()
 	
 func _on_timer_timeout() -> void:
 	Engine.time_scale = 1

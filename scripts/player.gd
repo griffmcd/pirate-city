@@ -84,10 +84,11 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta):
 	if current_hitbox and current_hitbox.is_colliding():
+		print('HIT')
 		var collider = current_hitbox.get_collider()
-		print("Collided with " + collider.get_class())
-		if collider.is_in_group("Enemies"):	
-			collider.queue_free()
+		print(collider.get_class())
+		if collider.has_method('damage'):
+			collider.damage()
 	move_and_slide()
 
 func _on_attack_cooldown_timer_timeout() -> void:

@@ -19,7 +19,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func get_animation_for_direction(velocity: Vector2) -> String:
-	if velocity.x == -1:
+	if velocity.x == -1:	
 		return "crab_left"
 	elif velocity.x == 1:
 		return "crab_right"
@@ -53,3 +53,7 @@ func _process(delta: float) -> void:
 		direction = direction.normalized()
 	position.x += direction.x * SPEED * delta 
 	position.y += direction.y * SPEED * delta 
+	
+func damage() -> void:
+	print('damaged crab')
+	queue_free()
