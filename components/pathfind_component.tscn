@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://brxvdcigp5k70"]
+
+[node name="PathfindComponent" type="Node2D"]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="IntervalTimer" type="Timer" parent="."]

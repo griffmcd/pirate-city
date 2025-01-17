@@ -1,6 +1,5 @@
 extends Node2D
 class_name InputComponent
-signal direction_changed
 
 @export var velocity_component: VelocityComponent 
 @export var animated_sprite: AnimatedSprite2D

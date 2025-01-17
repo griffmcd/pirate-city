@@ -1,11 +1,13 @@
-[gd_scene load_steps=38 format=3 uid="uid://bmuqtjnbujn1j"]
+[gd_scene load_steps=40 format=3 uid="uid://bmuqtjnbujn1j"]
 
 [ext_resource type="Texture2D" uid="uid://2cbfm5n5n8hy" path="res://assets/MiniWorldSprites/Animals/Pig.png" id="1_6jfh1"]
+[ext_resource type="Script" path="res://scripts/pig.gd" id="1_akw5q"]
 [ext_resource type="PackedScene" uid="uid://be3q0rw2uxkqi" path="res://components/health_component.tscn" id="2_4dkpb"]
 [ext_resource type="PackedScene" uid="uid://ce42i6vfv4ary" path="res://components/hurtbox_component.tscn" id="3_m1jbd"]
 [ext_resource type="PackedScene" uid="uid://d1w70dwcaac6q" path="res://components/velocity_component.tscn" id="4_kadx0"]
-[ext_resource type="PackedScene" uid="uid://d2niq21tlvkbi" path="res://components/input_component.tscn" id="5_tvfks"]
 [ext_resource type="PackedScene" uid="uid://bl4d5tiglfq4t" path="res://components/movement_component.tscn" id="6_rygj8"]
+[ext_resource type="PackedScene" uid="uid://brxvdcigp5k70" path="res://components/pathfind_component.tscn" id="7_s5wl4"]
+[ext_resource type="Script" path="res://scripts/pathfind_component.gd" id="8_8otqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6d86r"]
 atlas = ExtResource("1_6jfh1")
@@ -277,6 +279,7 @@ size = Vector2(8, 12)
 size = Vector2(8, 12)
 
 [node name="Pig" type="CharacterBody2D"]
+script = ExtResource("1_akw5q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wyye6")
@@ -298,11 +301,14 @@ shape = SubResource("RectangleShape2D_620sh")
 [node name="VelocityComponent" parent="." instance=ExtResource("4_kadx0")]
 velocity = Vector2(-1, 0)
 
-[node name="InputComponent" parent="." node_paths=PackedStringArray("velocity_component", "animated_sprite", "character_body") instance=ExtResource("5_tvfks")]
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("actor", "animated_sprite") instance=ExtResource("6_rygj8")]
+actor = NodePath("..")
+animated_sprite = NodePath("../AnimatedSprite2D")
+
+[node name="PathfindComponent" parent="." node_paths=PackedStringArray("velocity_component", "animated_sprite", "character_body") instance=ExtResource("7_s5wl4")]
+script = ExtResource("8_8otqv")
 velocity_component = NodePath("../VelocityComponent")
 animated_sprite = NodePath("../AnimatedSprite2D")
 character_body = NodePath("..")
 
-[node name="MovementComponent" parent="." node_paths=PackedStringArray("actor", "animated_sprite") instance=ExtResource("6_rygj8")]
-actor = NodePath("..")
-animated_sprite = NodePath("../AnimatedSprite2D")
+[node name="NavigationAgent2D2" type="NavigationAgent2D" parent="PathfindComponent"]
