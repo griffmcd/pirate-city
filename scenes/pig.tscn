@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bmuqtjnbujn1j"]
+[gd_scene load_steps=40 format=3 uid="uid://bmuqtjnbujn1j"]
 
 [ext_resource type="Texture2D" uid="uid://2cbfm5n5n8hy" path="res://assets/MiniWorldSprites/Animals/Pig.png" id="1_6jfh1"]
 [ext_resource type="Script" path="res://scripts/pig.gd" id="1_akw5q"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d1w70dwcaac6q" path="res://components/velocity_component.tscn" id="4_kadx0"]
 [ext_resource type="PackedScene" uid="uid://bl4d5tiglfq4t" path="res://components/movement_component.tscn" id="6_rygj8"]
 [ext_resource type="PackedScene" uid="uid://brxvdcigp5k70" path="res://components/pathfind_component.tscn" id="7_s5wl4"]
+[ext_resource type="PackedScene" uid="uid://bjcmumq7hr403" path="res://components/animation_component.tscn" id="8_i84iq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6d86r"]
 atlas = ExtResource("1_6jfh1")
@@ -280,6 +281,9 @@ size = Vector2(8, 12)
 [node name="Pig" type="CharacterBody2D"]
 script = ExtResource("1_akw5q")
 
+[node name="AnimationManager" parent="." node_paths=PackedStringArray("animated_sprite") instance=ExtResource("8_i84iq")]
+animated_sprite = NodePath("../AnimatedSprite2D")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wyye6")
 animation = &"move_up"
@@ -306,10 +310,7 @@ velocity = Vector2(-1, 0)
 actor = NodePath("..")
 animated_sprite = NodePath("../AnimatedSprite2D")
 
-[node name="PathfindComponent" parent="." node_paths=PackedStringArray("velocity_component", "animated_sprite", "character_body") instance=ExtResource("7_s5wl4")]
+[node name="PathfindComponent" parent="." node_paths=PackedStringArray("velocity_component", "animation_component", "character_body") instance=ExtResource("7_s5wl4")]
 velocity_component = NodePath("../VelocityComponent")
-animated_sprite = NodePath("../AnimatedSprite2D")
+animation_component = NodePath("../AnimationManager")
 character_body = NodePath("..")
-
-[node name="NavAgent2D" type="NavigationAgent2D" parent="PathfindComponent"]
-navigation_layers = 0

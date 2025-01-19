@@ -2,11 +2,11 @@ extends Node2D
 class_name PathfindComponent
 @export var movement_speed: float = 10.0
 @export var velocity_component: VelocityComponent
-@export var animated_sprite: AnimatedSprite2D 
+@export var animation_component: AnimationComponent
 @export var character_body: CharacterBody2D
 @export var target_position: Vector2
 var last_target_position: Vector2 = Vector2.ZERO
-@export var path_desired_distance: float = 2.0
+@export var path_desired_distance: float = 100.0
 @export var target_desired_distance: float = 2.0
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
@@ -23,9 +23,10 @@ func actor_setup() -> void:
 	await get_tree().physics_frame
 	set_movement_target(target_position)
 	last_target_position = target_position 
+	var velocity = global_position.direction_to(target_position) * movement_speed
+	animation_component.update_animation_based_on_velocity(velocity)
 	
 func set_movement_target(movement_target: Vector2):
-	print("New movement target: " + str(movement_target))
 	navigation_agent.set_target_position(movement_target)
 	
 func _process(delta: float) -> void:
@@ -38,5 +39,6 @@ func _physics_process(delta: float) -> void:
 	var current_agent_position: Vector2 = global_position 
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 	var velocity = current_agent_position.direction_to(next_path_position) * movement_speed
+	animation_component.update_animation_based_on_velocity(velocity)
 	velocity_component.accelerate(velocity, delta)
 	velocity_component.move(character_body)
