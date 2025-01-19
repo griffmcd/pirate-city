@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cgw15v7tj2kwi"]
+[gd_scene load_steps=17 format=4 uid="uid://cgw15v7tj2kwi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_utdhp"]
 [ext_resource type="TileSet" uid="uid://d7v1ljw2yik8" path="res://tilesets/village_tiles.tres" id="2_gq1d4"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bxvy1m65hlnou" path="res://scenes/giant_crab.tscn" id="8_6os53"]
 [ext_resource type="FontFile" uid="uid://cykwlwfx68ibg" path="res://assets/fonts/Pixeloid_Font_0_5/TrueType (.ttf)/PixeloidMono.ttf" id="10_np0m2"]
 [ext_resource type="PackedScene" uid="uid://bmuqtjnbujn1j" path="res://scenes/pig.tscn" id="11_biy07"]
+[ext_resource type="PackedScene" uid="uid://cynbwkevwhuhe" path="res://scenes/player.tscn" id="12_41o8b"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_f0o3n"]
 vertices = PackedVector2Array(-22.2266, 137, -19.2188, 270.219, -313.633, 276.758, -308.641, 134, -193.789, -35.8828, -93.8516, -33.1719, -195.781, -131.711, -105.852, -129.227, 153, 237.797, 153, 272.781, 30.7812, 270.203, 27.7812, 137, -480.922, 173.641, -479.07, -73, -454.93, -73, -451.438, 175.617, -394.93, -73.8594, -390.961, -38.1016, 21.0078, -31, 210.328, -34.7969, 213.312, 55.6875, 211.828, 174.469, -362.023, 161.758, -363.773, 238.898, -448.453, 238.094, -366.922, 134, 274.141, 57.6719, 275.852, 171.461, 212.828, 232.797)
@@ -174,4 +175,6 @@ position = Vector2(200, 448)
 [node name="Pig" parent="." node_paths=PackedStringArray("pathfind_target") instance=ExtResource("11_biy07")]
 position = Vector2(41, 137)
 scale = Vector2(2, 2)
-pathfind_target = NodePath("../Crabs/GiantCrab")
+pathfind_target = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("12_41o8b")]

@@ -1,8 +1,14 @@
-[gd_scene load_steps=46 format=3 uid="uid://cynbwkevwhuhe"]
+[gd_scene load_steps=54 format=3 uid="uid://cynbwkevwhuhe"]
 
 [ext_resource type="Texture2D" uid="uid://b0s7kvfxpf4ep" path="res://assets/MiniWorldSprites/Characters/Monsters/Pirates/PirateGrunt.png" id="1_mxbdm"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qy18s"]
+[ext_resource type="PackedScene" uid="uid://bjcmumq7hr403" path="res://components/animation_component.tscn" id="2_ajwwp"]
 [ext_resource type="PackedScene" uid="uid://be3q0rw2uxkqi" path="res://components/health_component.tscn" id="3_ycquj"]
+[ext_resource type="PackedScene" uid="uid://ce42i6vfv4ary" path="res://components/hurtbox_component.tscn" id="4_15f7o"]
+[ext_resource type="PackedScene" uid="uid://demu0qeup8jvo" path="res://components/hitbox_component.tscn" id="5_76i55"]
+[ext_resource type="PackedScene" uid="uid://d1w70dwcaac6q" path="res://components/velocity_component.tscn" id="6_kywtv"]
+[ext_resource type="PackedScene" uid="uid://bl4d5tiglfq4t" path="res://components/movement_component.tscn" id="7_v47yn"]
+[ext_resource type="PackedScene" uid="uid://d2niq21tlvkbi" path="res://components/input_component.tscn" id="8_nc1vy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17phk"]
 atlas = ExtResource("1_mxbdm")
@@ -263,7 +269,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_28wbl")
 }],
 "loop": true,
-"name": &"walk_down",
+"name": &"move_down",
 "speed": 10.0
 }, {
 "frames": [{
@@ -283,7 +289,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_i5ek2")
 }],
 "loop": true,
-"name": &"walk_left",
+"name": &"move_left",
 "speed": 8.0
 }, {
 "frames": [{
@@ -303,7 +309,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_d4b7y")
 }],
 "loop": true,
-"name": &"walk_right",
+"name": &"move_right",
 "speed": 8.0
 }, {
 "frames": [{
@@ -323,13 +329,19 @@ animations = [{
 "texture": SubResource("AtlasTexture_ctb8d")
 }],
 "loop": true,
-"name": &"walk_up",
+"name": &"move_up",
 "speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q185y"]
 radius = 4.0
 height = 12.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ffmy1"]
+size = Vector2(9, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8qsf"]
+size = Vector2(11, 11)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(12, -7)
@@ -338,10 +350,13 @@ collision_mask = 5
 script = ExtResource("1_qy18s")
 metadata/_edit_group_ = true
 
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("animated_sprite") instance=ExtResource("2_ajwwp")]
+animated_sprite = NodePath("../AnimatedSprite2D")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_rl10b")
-animation = &"attack_up"
-frame_progress = 0.0278356
+animation = &"move_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -349,41 +364,28 @@ shape = SubResource("CapsuleShape2D_q185y")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_ycquj")]
 
-[node name="Hitboxes" type="Node2D" parent="."]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_15f7o")]
+health_component = NodePath("../HealthComponent")
 
-[node name="AttackLeftHitbox" type="RayCast2D" parent="Hitboxes"]
-position = Vector2(12, -7)
-scale = Vector2(2, 2)
-target_position = Vector2(-11, 0)
-collision_mask = 4
-hit_from_inside = true
-collide_with_areas = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_ffmy1")
 
-[node name="AttackRightHitbox" type="RayCast2D" parent="Hitboxes"]
-position = Vector2(12, -7)
-scale = Vector2(2, 2)
-target_position = Vector2(11, 0.5)
-collision_mask = 4
-hit_from_inside = true
-collide_with_areas = true
+[node name="HitboxComponent" parent="." instance=ExtResource("5_76i55")]
 
-[node name="AttackDownHitbox" type="RayCast2D" parent="Hitboxes"]
-position = Vector2(12, -7)
-scale = Vector2(2, 2)
-target_position = Vector2(0, 14)
-collision_mask = 4
-hit_from_inside = true
-collide_with_areas = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_v8qsf")
 
-[node name="AttackUpHitbox" type="RayCast2D" parent="Hitboxes"]
-position = Vector2(12, -7)
-scale = Vector2(2, 2)
-target_position = Vector2(0.5, -14.5)
-collision_mask = 4
-hit_from_inside = true
-collide_with_areas = true
+[node name="VelocityComponent" parent="." instance=ExtResource("6_kywtv")]
 
-[node name="AttackCooldownTimer" type="Timer" parent="Hitboxes"]
-one_shot = true
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("actor", "animated_sprite") instance=ExtResource("7_v47yn")]
+actor = NodePath("..")
+animated_sprite = NodePath("../AnimatedSprite2D")
 
-[connection signal="timeout" from="Hitboxes/AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]
+[node name="InputComponent" parent="." node_paths=PackedStringArray("velocity_component", "animation_component", "character_body") instance=ExtResource("8_nc1vy")]
+position = Vector2(-12, 7)
+movement_speed = 100.0
+velocity_component = NodePath("../VelocityComponent")
+animation_component = NodePath("../AnimationComponent")
+character_body = NodePath("..")
