@@ -166,4 +166,4 @@ position = Vector2(200, 448)
 [node name="Pig" parent="." node_paths=PackedStringArray("pathfind_target") instance=ExtResource("11_biy07")]
 position = Vector2(41, 137)
 scale = Vector2(2, 2)
-pathfind_target = NodePath("../Coins/Coin")
+pathfind_target = NodePath("../Crabs/GiantCrab")

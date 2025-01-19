@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://brxvdcigp5k70"]
+[gd_scene load_steps=2 format=3 uid="uid://brxvdcigp5k70"]
+
+[ext_resource type="Script" path="res://scripts/pathfind_component.gd" id="1_bnfqw"]
 
 [node name="PathfindComponent" type="Node2D"]
+script = ExtResource("1_bnfqw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
