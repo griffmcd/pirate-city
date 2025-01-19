@@ -8,7 +8,6 @@ func _ready() -> void:
 
 func update_pathfind_target_position():
 	get_node("PathfindComponent").target_position = pathfind_target.global_position
-	print("Setting target position for pig PathfindComponent: " + str(pathfind_target.global_position))
 	
 func _process(delta: float) -> void:
 	update_pathfind_target_position()
