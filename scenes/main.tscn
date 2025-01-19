@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cgw15v7tj2kwi"]
+[gd_scene load_steps=16 format=4 uid="uid://cgw15v7tj2kwi"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_utdhp"]
 [ext_resource type="TileSet" uid="uid://d7v1ljw2yik8" path="res://tilesets/village_tiles.tres" id="2_gq1d4"]
@@ -11,6 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://bxvy1m65hlnou" path="res://scenes/giant_crab.tscn" id="8_6os53"]
 [ext_resource type="FontFile" uid="uid://cykwlwfx68ibg" path="res://assets/fonts/Pixeloid_Font_0_5/TrueType (.ttf)/PixeloidMono.ttf" id="10_np0m2"]
 [ext_resource type="PackedScene" uid="uid://bmuqtjnbujn1j" path="res://scenes/pig.tscn" id="11_biy07"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_f0o3n"]
+vertices = PackedVector2Array(-22.2266, 137, -19.2188, 270.219, -313.633, 276.758, -308.641, 134, -193.789, -35.8828, -93.8516, -33.1719, -195.781, -131.711, -105.852, -129.227, 153, 237.797, 153, 272.781, 30.7812, 270.203, 27.7812, 137, -480.922, 173.641, -479.07, -73, -454.93, -73, -451.438, 175.617, -394.93, -73.8594, -390.961, -38.1016, 21.0078, -31, 210.328, -34.7969, 213.312, 55.6875, 211.828, 174.469, -362.023, 161.758, -363.773, 238.898, -448.453, 238.094, -366.922, 134, 274.141, 57.6719, 275.852, 171.461, 212.828, 232.797)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(4, 6, 7, 5), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(15, 14, 16, 17), PackedInt32Array(8, 11, 18, 19, 20, 21), PackedInt32Array(22, 23, 24, 15, 25), PackedInt32Array(25, 15, 17, 4), PackedInt32Array(3, 25, 4), PackedInt32Array(0, 5, 18, 11), PackedInt32Array(26, 27, 21, 20), PackedInt32Array(8, 21, 28)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-352, 161, -354, 249, -458, 248, -461, 185, -491, 183, -489, -83, -455, -83, -386, -84, -382, -48, -204, -46, -206, -142, -97, -139, -85, -43, 21, -41, 220, -45, 223, 46, 284, 48, 286, 181, 222, 184, 223, 242, 163, 247, 163, 283, 21, 280, 18, 147, -12, 147, -9, 280, -324, 287, -319, 144, -355, 144)])
 
 [sub_resource type="Animation" id="Animation_cgy5o"]
 length = 10.0
@@ -54,6 +59,9 @@ _data = {
 [node name="Main" type="Node2D"]
 position = Vector2(560, 248)
 script = ExtResource("1_utdhp")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_f0o3n")
 
 [node name="GameStateManager" type="Node" parent="."]
 unique_name_in_owner = true

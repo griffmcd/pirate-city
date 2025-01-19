@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bmuqtjnbujn1j"]
+[gd_scene load_steps=39 format=3 uid="uid://bmuqtjnbujn1j"]
 
 [ext_resource type="Texture2D" uid="uid://2cbfm5n5n8hy" path="res://assets/MiniWorldSprites/Animals/Pig.png" id="1_6jfh1"]
 [ext_resource type="Script" path="res://scripts/pig.gd" id="1_akw5q"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://d1w70dwcaac6q" path="res://components/velocity_component.tscn" id="4_kadx0"]
 [ext_resource type="PackedScene" uid="uid://bl4d5tiglfq4t" path="res://components/movement_component.tscn" id="6_rygj8"]
 [ext_resource type="PackedScene" uid="uid://brxvdcigp5k70" path="res://components/pathfind_component.tscn" id="7_s5wl4"]
-[ext_resource type="Script" path="res://scripts/pathfind_component.gd" id="8_8otqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6d86r"]
 atlas = ExtResource("1_6jfh1")
@@ -299,6 +298,8 @@ position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_620sh")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("4_kadx0")]
+max_speed = 10.0
+acceleration = 500.0
 velocity = Vector2(-1, 0)
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("actor", "animated_sprite") instance=ExtResource("6_rygj8")]
@@ -306,7 +307,6 @@ actor = NodePath("..")
 animated_sprite = NodePath("../AnimatedSprite2D")
 
 [node name="PathfindComponent" parent="." node_paths=PackedStringArray("velocity_component", "animated_sprite", "character_body") instance=ExtResource("7_s5wl4")]
-script = ExtResource("8_8otqv")
 velocity_component = NodePath("../VelocityComponent")
 animated_sprite = NodePath("../AnimatedSprite2D")
 character_body = NodePath("..")
