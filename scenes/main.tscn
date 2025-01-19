@@ -6,11 +6,11 @@
 [ext_resource type="Script" path="res://scripts/hud.gd" id="3_p74n1"]
 [ext_resource type="PackedScene" uid="uid://iwnnt72r3b60" path="res://scenes/default_layer.tscn" id="3_uqblt"]
 [ext_resource type="PackedScene" uid="uid://c1xie7nf0rb2u" path="res://scenes/ship.tscn" id="4_ndfkh"]
-[ext_resource type="PackedScene" uid="uid://cynbwkevwhuhe" path="res://scenes/player.tscn" id="5_6f5oj"]
 [ext_resource type="PackedScene" uid="uid://ehe5yiw8owwe" path="res://scenes/coin.tscn" id="6_w17so"]
 [ext_resource type="PackedScene" uid="uid://82n2wlorg356" path="res://scenes/door.tscn" id="7_ov3og"]
 [ext_resource type="PackedScene" uid="uid://bxvy1m65hlnou" path="res://scenes/giant_crab.tscn" id="8_6os53"]
 [ext_resource type="FontFile" uid="uid://cykwlwfx68ibg" path="res://assets/fonts/Pixeloid_Font_0_5/TrueType (.ttf)/PixeloidMono.ttf" id="10_np0m2"]
+[ext_resource type="PackedScene" uid="uid://bmuqtjnbujn1j" path="res://scenes/pig.tscn" id="11_biy07"]
 
 [sub_resource type="Animation" id="Animation_cgy5o"]
 length = 10.0
@@ -95,19 +95,6 @@ tile_set = ExtResource("2_gq1d4")
 [node name="Base Tileset Layer" type="TileMapLayer" parent="."]
 tile_set = ExtResource("2_gq1d4")
 
-[node name="Player" parent="." instance=ExtResource("5_6f5oj")]
-position = Vector2(159, 120)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0.5, 0)
-zoom = Vector2(1.5, 1.5)
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-
-[node name="StartPosition" type="Marker2D" parent="Player"]
-position = Vector2(159, 120)
-scale = Vector2(0.5, 0.5)
-
 [node name="Sailing Ship" parent="." instance=ExtResource("4_ndfkh")]
 position = Vector2(-1055, 457)
 rotation = -1.5708
@@ -175,3 +162,8 @@ position = Vector2(667, 449)
 
 [node name="GiantCrab6" parent="Crabs" instance=ExtResource("8_6os53")]
 position = Vector2(200, 448)
+
+[node name="Pig" parent="." node_paths=PackedStringArray("pathfind_target") instance=ExtResource("11_biy07")]
+position = Vector2(41, 137)
+scale = Vector2(2, 2)
+pathfind_target = NodePath("../Crabs/GiantCrab")

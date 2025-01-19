@@ -14,7 +14,6 @@ const DOWN_DIR = Vector2(0, 1)
 @onready var attack_up_hitbox: RayCast2D = $Hitboxes/AttackUpHitbox
 @onready var attack_cooldown_timer: Timer = $Hitboxes/AttackCooldownTimer
 
-var SCREEN_SIZE
 var direction = DOWN_DIR
 var current_hitbox = attack_down_hitbox 
 var can_attack = true 
@@ -22,7 +21,6 @@ var is_attacking = false
 
 
 func _ready() -> void:
-	SCREEN_SIZE = get_viewport_rect().size
 	hide()
 	
 func start(pos):

@@ -1,7 +1,8 @@
-[gd_scene load_steps=45 format=3 uid="uid://cynbwkevwhuhe"]
+[gd_scene load_steps=46 format=3 uid="uid://cynbwkevwhuhe"]
 
 [ext_resource type="Texture2D" uid="uid://b0s7kvfxpf4ep" path="res://assets/MiniWorldSprites/Characters/Monsters/Pirates/PirateGrunt.png" id="1_mxbdm"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qy18s"]
+[ext_resource type="PackedScene" uid="uid://be3q0rw2uxkqi" path="res://components/health_component.tscn" id="3_ycquj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17phk"]
 atlas = ExtResource("1_mxbdm")
@@ -332,7 +333,6 @@ height = 12.0
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(12, -7)
-scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_qy18s")
@@ -346,6 +346,8 @@ frame_progress = 0.0278356
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_q185y")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_ycquj")]
 
 [node name="Hitboxes" type="Node2D" parent="."]
 
