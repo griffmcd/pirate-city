@@ -303,7 +303,7 @@ shape = SubResource("RectangleShape2D_620sh")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("4_kadx0")]
 max_speed = 10.0
-acceleration = 500.0
+acceleration = 200.0
 velocity = Vector2(-1, 0)
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("actor", "animated_sprite") instance=ExtResource("6_rygj8")]
@@ -311,6 +311,9 @@ actor = NodePath("..")
 animated_sprite = NodePath("../AnimatedSprite2D")
 
 [node name="PathfindComponent" parent="." node_paths=PackedStringArray("velocity_component", "animation_component", "character_body") instance=ExtResource("7_s5wl4")]
+movement_speed = 50.0
 velocity_component = NodePath("../VelocityComponent")
 animation_component = NodePath("../AnimationManager")
 character_body = NodePath("..")
+path_desired_distance = 25.0
+target_desired_distance = 100.0

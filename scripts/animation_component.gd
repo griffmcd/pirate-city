@@ -7,8 +7,8 @@ const MOVE_RIGHT: String = "move_right"
 const MOVE_UP: String = "move_up"
 const MOVE_DOWN: String = "move_down"
 
-func update_animation_based_on_velocity(velocity: Vector2) -> void:
-	if velocity.x > 0.2 or velocity.y > 0.2:
+func update_animation_based_on_pathfinding_velocity(velocity: Vector2) -> void:
+	if abs(velocity.x) > 0.2 or abs(velocity.y) > 0.2:
 		if abs(velocity.x) > abs(velocity.y):
 			if velocity.x < 0:
 				animated_sprite.animation = MOVE_LEFT
@@ -19,6 +19,7 @@ func update_animation_based_on_velocity(velocity: Vector2) -> void:
 				animated_sprite.animation = MOVE_UP
 			elif velocity.y > 0: 
 				animated_sprite.animation = MOVE_DOWN
+				
 		animated_sprite.play()
 	else:
 		animated_sprite.stop()

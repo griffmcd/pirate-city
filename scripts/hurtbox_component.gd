@@ -5,7 +5,6 @@ signal hit_by_hitbox
 
 @export var health_component: HealthComponent
 @export var status_receiver: Node 
-@export var projectile_impact_scene: PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
