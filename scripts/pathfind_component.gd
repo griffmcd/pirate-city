@@ -31,13 +31,12 @@ func set_movement_target(movement_target: Vector2):
 	navigation_agent.set_target_position(movement_target)
 	
 func is_within_collision_radius() -> bool:
-	var offset = Vector2(collision_radius, 0).rotated(navigation_agent.radius * PI / 2)
-	return target_position.distance_to(global_position + offset) <= collision_radius
+	return (abs(target_position.x - global_position.x) <= collision_radius 
+		or abs(target_position.y - global_position.y) <= collision_radius)
 	
 func _process(delta: float) -> void:
 	if (target_position != last_target_position):
 		set_movement_target(target_position)
-	
 	
 func _physics_process(delta: float) -> void:
 	if navigation_agent.is_navigation_finished():
