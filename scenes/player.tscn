@@ -389,3 +389,6 @@ movement_speed = 100.0
 velocity_component = NodePath("../VelocityComponent")
 animation_component = NodePath("../AnimationComponent")
 character_body = NodePath("..")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
