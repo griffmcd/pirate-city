@@ -14,5 +14,5 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	print("+1 coin")
-	game_state_manager.increase_coin_amount(1)
+	#game_state_manager.increase_coin_amount(1)
 	queue_free()

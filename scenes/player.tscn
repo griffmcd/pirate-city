@@ -334,21 +334,19 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q185y"]
-radius = 4.0
-height = 12.0
+height = 24.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffmy1"]
-size = Vector2(9, 12)
+size = Vector2(15, 21.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8qsf"]
-size = Vector2(11, 11)
+size = Vector2(17.5, 15.5)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(12, -7)
+position = Vector2(10, -14)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_qy18s")
-metadata/_edit_group_ = true
 
 [node name="AnimationComponent" parent="." node_paths=PackedStringArray("animated_sprite") instance=ExtResource("2_ajwwp")]
 animated_sprite = NodePath("../AnimatedSprite2D")
@@ -359,7 +357,7 @@ sprite_frames = SubResource("SpriteFrames_rl10b")
 animation = &"move_up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_q185y")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_ycquj")]
@@ -368,14 +366,16 @@ shape = SubResource("CapsuleShape2D_q185y")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(0.5, 1)
+position = Vector2(-0.5, 1.75)
 shape = SubResource("RectangleShape2D_ffmy1")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("5_76i55")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, 7)
+position = Vector2(-1, 14)
 shape = SubResource("RectangleShape2D_v8qsf")
+metadata/_edit_group_ = true
 
 [node name="VelocityComponent" parent="." instance=ExtResource("6_kywtv")]
 

@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://coyal8kkhr8cq"]
+[gd_scene load_steps=10 format=4 uid="uid://coyal8kkhr8cq"]
 
 [ext_resource type="Texture2D" uid="uid://m0di3v0kxwsc" path="res://assets/interior free/interior free.png" id="1_7uaui"]
 [ext_resource type="Script" path="res://scripts/house_interior.gd" id="1_jwvni"]
 [ext_resource type="Texture2D" uid="uid://dca51p0ele3ia" path="res://assets/Pixel Art Top Down - Basic v1.1.2/Texture/TX Tileset Wall.png" id="2_fq2hn"]
 [ext_resource type="PackedScene" uid="uid://cynbwkevwhuhe" path="res://scenes/player.tscn" id="3_h6ib0"]
-[ext_resource type="PackedScene" uid="uid://82n2wlorg356" path="res://scenes/door.tscn" id="4_ujd5f"]
+[ext_resource type="PackedScene" uid="uid://bsumh6fox20g3" path="res://scenes/world.tscn" id="6_557ic"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vgxr4"]
 resource_name = "Interior Free"
@@ -171,6 +171,8 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vgxr4")
 sources/2 = SubResource("TileSetAtlasSource_lnkkx")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y3kis"]
+
 [node name="HouseInterior" type="Node2D"]
 script = ExtResource("1_jwvni")
 
@@ -198,6 +200,11 @@ tile_set = SubResource("TileSet_4e0mf")
 position = Vector2(71, 144)
 scale = Vector2(0.75, 0.75)
 
-[node name="Door" parent="." instance=ExtResource("4_ujd5f")]
-position = Vector2(72, 168)
-interior_scene_path = "res://scenes/main.tscn"
+[node name="DoorToWorld" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorToWorld"]
+position = Vector2(71, 165)
+shape = SubResource("RectangleShape2D_y3kis")
+
+[connection signal="body_entered" from="DoorToWorld" to="." method="_on_door_to_world_body_entered"]
