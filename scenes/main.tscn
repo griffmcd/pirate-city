@@ -115,10 +115,12 @@ libraries = {
 autoplay = "sailing"
 
 [node name="Ship" parent="." instance=ExtResource("4_ndfkh")]
-position = Vector2(624, 136)
+position = Vector2(689, 232)
+scale = Vector2(2, 2)
 
 [node name="Door" parent="." instance=ExtResource("7_ov3og")]
 position = Vector2(190, -88)
+interior_scene_path = "res://scenes/house_interior.tscn"
 
 [node name="Coins" type="Node" parent="."]
 
