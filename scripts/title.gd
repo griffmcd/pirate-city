@@ -1,6 +1,5 @@
-extends Node2D
+extends Control
 
-@export var starter_house: PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,6 +11,6 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_door_to_starter_house_body_entered(body: Node2D) -> void:
-	
-	SceneSwitcher.switch_scene("res://scenes/house_interior.tscn")
+func _on_new_game_button_pressed() -> void:
+	GameStateManager.new_game()
+	SceneSwitcher.switch_scene("res://scenes/world.tscn")

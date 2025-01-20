@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cynbwkevwhuhe"]
+[gd_scene load_steps=55 format=3 uid="uid://cynbwkevwhuhe"]
 
 [ext_resource type="Texture2D" uid="uid://b0s7kvfxpf4ep" path="res://assets/MiniWorldSprites/Characters/Monsters/Pirates/PirateGrunt.png" id="1_mxbdm"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_qy18s"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d1w70dwcaac6q" path="res://components/velocity_component.tscn" id="6_kywtv"]
 [ext_resource type="PackedScene" uid="uid://bl4d5tiglfq4t" path="res://components/movement_component.tscn" id="7_v47yn"]
 [ext_resource type="PackedScene" uid="uid://d2niq21tlvkbi" path="res://components/input_component.tscn" id="8_nc1vy"]
+[ext_resource type="Script" path="res://scripts/game_state_helper.gd" id="10_wmkjm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17phk"]
 atlas = ExtResource("1_mxbdm")
@@ -392,3 +393,7 @@ character_body = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="GameStateHelper" type="Node" parent="."]
+script = ExtResource("10_wmkjm")
+save_properties = Array[String](["global_position"])

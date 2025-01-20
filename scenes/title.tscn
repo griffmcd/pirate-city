@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqd2prra3bbo"]
+
+[ext_resource type="Texture2D" uid="uid://ncgvaxdncqg4" path="res://assets/backgrounds/Nature Landscapes Free Pixel Art/nature_8/origbig.png" id="1_154l2"]
+[ext_resource type="Script" path="res://scripts/title.gd" id="1_dnjp8"]
+[ext_resource type="FontFile" uid="uid://cqvns4tdx6o44" path="res://assets/fonts/Linerama_Font_1_14/TrueType (.ttf)/Linerama-Bold.ttf" id="2_npig8"]
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1159.0
+offset_bottom = 663.0
+script = ExtResource("1_dnjp8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 16.0
+offset_right = 2312.0
+offset_bottom = 1312.0
+scale = Vector2(0.497769, 0.496263)
+texture = ExtResource("1_154l2")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -499.5
+offset_top = 24.0
+offset_right = 164.5
+offset_bottom = 167.0
+grow_horizontal = 2
+scale = Vector2(1.5, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_npig8")
+theme_override_font_sizes/font_size = 64
+text = "Pirate City"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewGameButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 296.0
+offset_right = 536.0
+offset_bottom = 347.0
+theme_override_fonts/font = ExtResource("2_npig8")
+theme_override_font_sizes/font_size = 27
+text = "New Game"
+
+[connection signal="pressed" from="NewGameButton" to="." method="_on_new_game_button_pressed"]
